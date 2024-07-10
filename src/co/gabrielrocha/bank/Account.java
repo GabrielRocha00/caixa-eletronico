@@ -37,6 +37,11 @@ public class Account {
             logger.out("SAQUE - R$ " + value +  " sua conta é de R$ " + balance);
             return true;
     }
+
+    public double getBalance(){
+        return balance;
+    }
+
     @Override
     public String toString() {
         String result = "A conta " + this.name + " " + this.ag + " / " + this.cc + " Possui: R$ " + balance;

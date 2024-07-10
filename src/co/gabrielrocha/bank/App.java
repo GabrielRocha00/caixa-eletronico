@@ -1,18 +1,44 @@
 package co.gabrielrocha.bank;
 
+import java.sql.SQLOutput;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Bank santander = new Bank("0001");
+        // C = Criar conta
+        // E = Sair (exit)
 
-        // depositar, saque, sair
+        while (true) {
+            System.out.println("O que deseja fazer? C = Criar conta, E = Sair do programa");
+            String op = scanner.nextLine();
 
-        Account account = new Account("0001", "1234", "Seu madruga");
-        // D = deposito
-        // S = saque
-        // E = sair (exit)
+            if (op.equals("C")) {
+                System.out.println("Digite seu nome");
+                String name = scanner.nextLine();
+                Account account = santander.generateAccount(name);
+                santander.insertAccount(account);
 
+                operateAccount(account);
+            } else if (op.equals("E")) {
+                break;
+            } else {
+                System.out.println("Comando invalido, tente novamente");
+
+            }
+        }
+
+        List<Account> accountList = santander.getAccounts();
+        for(Account cc : accountList) {
+            System.out.println(cc);
+        }
+        santander.outputTotal();
+    }
+
+    static void operateAccount(Account account) {
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("o que deseja fazer? D = DEPOSITO, S = SAQUE, E = SAIR DA CONTA");
             String op = scanner.nextLine();
@@ -36,4 +62,5 @@ public class App {
 
         }
     }
+
 }
